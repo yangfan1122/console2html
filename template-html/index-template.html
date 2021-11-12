@@ -3,21 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>Console2html dev</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script>var exports = {}</script>
   <script src="dist/Console2html.js" lang="text/javascript"></script>
   <style>
     body {
       margin: 0;
     }
+    .test-div {
+      position: absolute;
+      z-index: 100;
+      width: 100px;
+      height: 100px;
+      background-color: khaki;
+    }
   </style>
 </head>
 <body>
-
+<div class="test-div">test content</div>
 <script>
   const c2h = new Console2html()
 
   setTimeout(() => {
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 30; i++) {
       if (i % 2 === 0) {
         console.log(i)
       } else if (i % 3 === 0) {
@@ -26,10 +34,7 @@
         console.warn(i)
       }
     }
-    setTimeout( () => {
-      console.clear()
-    }, 1000)
-  }, 2000)
+  }, 1000)
 </script>
 </body>
 </html>
