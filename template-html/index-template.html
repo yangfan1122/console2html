@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console2html dev</title>
+  <script>var exports = {}</script>
+  <script src="dist/Console2html.js" lang="text/javascript"></script>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const c2h = new Console2html()
+
+  setTimeout(() => {
+    for (var i = 0; i < 100; i++) {
+      if (i % 2 === 0) {
+        console.log(i)
+      } else if (i % 3 === 0) {
+        console.error(i)
+      } else {
+        console.warn(i)
+      }
+    }
+    setTimeout( () => {
+      console.clear()
+    }, 1000)
+  }, 2000)
+</script>
+</body>
+</html>

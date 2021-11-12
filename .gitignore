@@ -1,0 +1,6 @@
+.idea/
+docs/
+dist/
+node_modules/
+html-template/dist/
+examples/dev-react/node_modules/

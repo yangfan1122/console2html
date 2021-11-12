@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "declaration": true,
+    "outDir": "./template-html/dist",
+    "strict": false,
+    "removeComments": false,
+    "strictPropertyInitialization": false
+  },
+  "include": [
+    "./src/**/*",
+    "./*.d.ts"
+  ]
+}

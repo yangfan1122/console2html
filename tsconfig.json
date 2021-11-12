@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "declaration": true,
+    "outDir": "./dist",
+    "strict": false,
+    "removeComments": true,
+    "strictPropertyInitialization": false
+  },
+  "include": [
+    "./src/**/*",
+    "./*.d.ts"
+  ]
+}
