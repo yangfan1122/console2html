@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "AMD",
     "declaration": true,
-    "outFile": "./dist/console2html.js",
+    "outDir": "./dist",
     "strict": false,
     "removeComments": true,
     "strictPropertyInitialization": false
