@@ -2,8 +2,6 @@
   "name": "console2html",
   "version": "1.0.0",
   "description": "Print log on html",
-  "main": "./dist/console2html.js",
-  "style": "./styles/console2html.css",
   "scripts": {
     "clean": "rimraf ./dist/*",
     "prebuild": "npm run clean",
@@ -25,9 +23,5 @@
     "libs",
     "dist",
     "styles"
-  ],
-  "devDependencies": {
-    "css-loader": "^3.1.0",
-    "style-loader": "^0.23.1"
-  }
+  ]
 }

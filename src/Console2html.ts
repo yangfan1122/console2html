@@ -5,18 +5,15 @@ export class Console2html {
   private trigger: HTMLDivElement
 
   public constructor () {
-    this.init()
   }
 
-  private init (): void {
-    this.wLoadedHandler = this.windowLoaded.bind(this)
+  /**
+   * Should be fired after window has loaded.
+   */
+  public init (): void {
     this.wResizeHandler = this.windowResize.bind(this)
-    window.addEventListener('load', this.wLoadedHandler)
     window.addEventListener('resize', this.wResizeHandler)
-  }
 
-  private windowLoaded (event: Event): void {
-    window.removeEventListener('load', this.wLoadedHandler)
     this.consoleElement()
     this.conver()
   }
@@ -30,13 +27,20 @@ export class Console2html {
     const zIndex: number = this.zIndexMax() + 1
 
     this.container = document.createElement('div')
+    this.container.id = 'c2hc'
     this.container.style.position = 'absolute'
     this.container.style.width = window.innerWidth + 'px'
     this.container.style.display = 'none'
+    this.container.style.top = '0'
     this.container.style.zIndex = zIndex.toString()
+    const c2hc: HTMLElement = document.getElementById('c2hc')
+    if (c2hc) {
+      document.body.removeChild(c2hc)
+    }
     document.body.appendChild(this.container)
 
     this.trigger = document.createElement('div')
+    this.trigger.id = 'c2ht'
     this.trigger.style.width = '20px'
     this.trigger.style.position = 'fixed'
     this.trigger.style.bottom = '5px'
@@ -51,6 +55,10 @@ export class Console2html {
     this.trigger.style.color = '#666'
     this.trigger.style.zIndex = (Number(this.container.style.zIndex) + 1).toString()
     this.trigger.innerHTML = 'on'
+    const c2ht = document.getElementById('c2ht')
+    if (c2ht) {
+      document.body.removeChild(c2ht)
+    }
     document.body.appendChild(this.trigger)
     this.trigger.addEventListener('click', this.triggerClick.bind(this))
   }
@@ -108,9 +116,12 @@ export class Console2html {
     this.container.innerHTML = ''
   }
 
-
   private zIndexMax (): number {
-    const arr: number[] = [...document.all].map(e => +window.getComputedStyle(e).zIndex || 0)
-    return arr.length ? Math.max(...arr) : 0
+    const allElements: HTMLCollection = document.getElementsByTagName("*")
+    const zIndexs: number[] = []
+    for (let i: number = 0; i < allElements.length; i++) {
+      zIndexs.push(Number(window.getComputedStyle(allElements[i]).zIndex) || 0)
+    }
+    return zIndexs.length ? Math.max(...zIndexs) : 0
   }
 }

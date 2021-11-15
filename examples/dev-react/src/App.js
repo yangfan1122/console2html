@@ -1,10 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
-import { Console2html } from './libs/Console2html.js'
+import logo from './logo.svg'
+import './App.css'
+import { Console2html } from 'console2html'
+let c2h
 
 function App() {
-  var c2h = new Console2html()
-  console.log(c2h)
+  c2h = new Console2html()
+  c2h.init()
+
+  console.log('test log')
+  console.warn('test warn')
+  console.error('test error')
 
   return (
     <div className="App">
@@ -23,7 +28,7 @@ function App() {
         </a>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
