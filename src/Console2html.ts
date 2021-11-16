@@ -1,5 +1,4 @@
 export class Console2html {
-  private wLoadedHandler: any
   private wResizeHandler: any
   private container: HTMLDivElement
   private trigger: HTMLDivElement

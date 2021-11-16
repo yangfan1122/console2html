@@ -1,7 +1,8 @@
 {
   "name": "console2html",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Print log on html",
+  "main": "./dist/Console2html.js",
   "scripts": {
     "clean": "rimraf ./dist/*",
     "prebuild": "npm run clean",
@@ -18,7 +19,7 @@
     "rimraf": "^2.7.1",
     "typescript": "^3.9.10"
   },
-  "homepage": "",
+  "homepage": "https://github.com/yangfan1122/console2html",
   "files": [
     "libs",
     "dist",
