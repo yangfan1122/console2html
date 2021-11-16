@@ -33,10 +33,13 @@ export class Console2html {
     this.container.style.top = '0'
     this.container.style.zIndex = zIndex.toString()
     const c2hc: HTMLElement = document.getElementById('c2hc')
+    let c2hcContent: string = ''
     if (c2hc) {
+      c2hcContent = c2hc.innerHTML
       document.body.removeChild(c2hc)
     }
     document.body.appendChild(this.container)
+    this.container.innerHTML += c2hcContent
 
     this.trigger = document.createElement('div')
     this.trigger.id = 'c2ht'
