@@ -12,7 +12,7 @@ npm install console2html
 
 ## Usage
 
-#### [React](https://github.com/yangfan1122/console2html/tree/master/examples/dev-react)
+#### React
 App.js
 ```jsx harmony
 import { Console2html } from 'console2html'
