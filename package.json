@@ -1,6 +1,6 @@
 {
   "name": "console2html",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Print log to HTML",
   "main": "./dist/Console2html.js",
   "scripts": {

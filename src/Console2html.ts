@@ -1,12 +1,15 @@
-import LogElement from "./element/LogElement"
-import WarnElement from "./element/WarnElement"
-import ErrorElement from "./element/ErrorElement"
-import Container from './element/Container'
+import LogElement from "./elements/LogElement"
+import WarnElement from "./elements/WarnElement"
+import ErrorElement from "./elements/ErrorElement"
+import Container from './elements/Container'
+import Trigger from './elements/Trigger'
+import Utils from './utils/Utils'
+import { onContent, offContent, logId, triggerId } from './Global'
 
 export class Console2html {
   private wResizeHandler: any
   private logContainer: Container
-  private trigger: HTMLDivElement
+  private triggerContainer: Trigger
 
   public constructor () {
   }
@@ -23,65 +26,39 @@ export class Console2html {
   }
 
   private windowResize (event: Event): void {
-    // this.container.style.width = window.innerWidth + 'px'
     this.logContainer.defineStyle('width', window.innerWidth + 'px')
-    this.trigger.style.right = '5px'
+    this.triggerContainer.defineStyle('right', '5px')
   }
 
   private consoleElement (): void {
-    const zIndex: number = this.zIndexMax() + 1
-    const id: string = 'c2hc'
+    const zIndex: number = Utils.zIndexMax() + 1
 
-    // this.container = document.createElement('div')
-    // this.container.id = 'c2hc'
-    // this.container.style.position = 'absolute'
-    // this.container.style.width = window.innerWidth + 'px'
-    // this.container.style.display = 'none'
-    // this.container.style.top = '0'
-    // this.container.style.zIndex = zIndex.toString()
-    this.logContainer = new Container(id, zIndex.toString())
-
-
-    const c2hc: HTMLElement = document.getElementById('c2hc')
+    this.logContainer = new Container(logId, zIndex.toString())
+    const c2hc: HTMLElement = document.getElementById(logId)
     let c2hcContent: string = ''
     if (c2hc) {
       c2hcContent = c2hc.innerHTML
       document.body.removeChild(c2hc)
     }
     document.body.appendChild(this.logContainer.container)
-    // this.container.innerHTML += c2hcContent
+    this.logContainer.setValue(c2hcContent)
 
-    this.trigger = document.createElement('div')
-    this.trigger.id = 'c2ht'
-    this.trigger.style.width = '20px'
-    this.trigger.style.position = 'fixed'
-    this.trigger.style.bottom = '5px'
-    this.trigger.style.right = '5px'
-    this.trigger.style.fontSize = '12px'
-    this.trigger.style.cursor = 'pointer'
-    this.trigger.style.backgroundColor = 'white'
-    this.trigger.style.border = '1px solid #ccc'
-    this.trigger.style.userSelect = 'none'
-    this.trigger.style.padding = '3px'
-    this.trigger.style.textAlign = 'center'
-    this.trigger.style.color = '#666'
-    this.trigger.style.zIndex = (zIndex + 1).toString()
-    this.trigger.innerHTML = 'on'
-    const c2ht = document.getElementById('c2ht')
+    this.triggerContainer = new Trigger(triggerId, (zIndex + 1).toString())
+    const c2ht = document.getElementById(triggerId)
     if (c2ht) {
       document.body.removeChild(c2ht)
     }
-    document.body.appendChild(this.trigger)
-    this.trigger.addEventListener('click', this.triggerClick.bind(this))
+    document.body.appendChild(this.triggerContainer.container)
+    this.triggerContainer.container.addEventListener('click', this.triggerClick.bind(this))
   }
 
   private triggerClick (event: MouseEvent): void {
     if (this.logContainer.getStyle('display') === 'none') {
       this.logContainer.defineStyle('display', 'block')
-      this.trigger.innerHTML = 'off'
+      this.triggerContainer.setValue(offContent)
     } else {
       this.logContainer.defineStyle('display', 'none')
-      this.trigger.innerHTML = 'on'
+      this.triggerContainer.setValue(onContent)
     }
   }
 
@@ -134,12 +111,4 @@ export class Console2html {
     this.logContainer.setValue('')
   }
 
-  private zIndexMax (): number {
-    const allElements: HTMLCollection = document.getElementsByTagName("*")
-    const zIndexs: number[] = []
-    for (let i: number = 0; i < allElements.length; i++) {
-      zIndexs.push(Number(window.getComputedStyle(allElements[i]).zIndex) || 0)
-    }
-    return zIndexs.length ? Math.max(...zIndexs) : 0
-  }
 }

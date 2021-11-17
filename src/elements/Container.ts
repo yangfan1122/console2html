@@ -9,6 +9,7 @@ export default class Container extends Element {
 
   public constructor(id: string, zIndex: string) {
     super()
+
     this.defineProperty('id', id)
     this.defineStyle('position', this.position)
     this.defineStyle('width', this.width)
