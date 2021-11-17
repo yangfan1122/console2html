@@ -1,10 +1,11 @@
 import LogElement from "./element/LogElement"
 import WarnElement from "./element/WarnElement"
 import ErrorElement from "./element/ErrorElement"
+import Container from './element/Container'
 
 export class Console2html {
   private wResizeHandler: any
-  private container: HTMLDivElement
+  private logContainer: Container
   private trigger: HTMLDivElement
 
   public constructor () {
@@ -22,28 +23,33 @@ export class Console2html {
   }
 
   private windowResize (event: Event): void {
-    this.container.style.width = window.innerWidth + 'px'
+    // this.container.style.width = window.innerWidth + 'px'
+    this.logContainer.defineStyle('width', window.innerWidth + 'px')
     this.trigger.style.right = '5px'
   }
 
   private consoleElement (): void {
     const zIndex: number = this.zIndexMax() + 1
+    const id: string = 'c2hc'
 
-    this.container = document.createElement('div')
-    this.container.id = 'c2hc'
-    this.container.style.position = 'absolute'
-    this.container.style.width = window.innerWidth + 'px'
-    this.container.style.display = 'none'
-    this.container.style.top = '0'
-    this.container.style.zIndex = zIndex.toString()
+    // this.container = document.createElement('div')
+    // this.container.id = 'c2hc'
+    // this.container.style.position = 'absolute'
+    // this.container.style.width = window.innerWidth + 'px'
+    // this.container.style.display = 'none'
+    // this.container.style.top = '0'
+    // this.container.style.zIndex = zIndex.toString()
+    this.logContainer = new Container(id, zIndex.toString())
+
+
     const c2hc: HTMLElement = document.getElementById('c2hc')
     let c2hcContent: string = ''
     if (c2hc) {
       c2hcContent = c2hc.innerHTML
       document.body.removeChild(c2hc)
     }
-    document.body.appendChild(this.container)
-    this.container.innerHTML += c2hcContent
+    document.body.appendChild(this.logContainer.container)
+    // this.container.innerHTML += c2hcContent
 
     this.trigger = document.createElement('div')
     this.trigger.id = 'c2ht'
@@ -59,7 +65,7 @@ export class Console2html {
     this.trigger.style.padding = '3px'
     this.trigger.style.textAlign = 'center'
     this.trigger.style.color = '#666'
-    this.trigger.style.zIndex = (Number(this.container.style.zIndex) + 1).toString()
+    this.trigger.style.zIndex = (zIndex + 1).toString()
     this.trigger.innerHTML = 'on'
     const c2ht = document.getElementById('c2ht')
     if (c2ht) {
@@ -70,11 +76,11 @@ export class Console2html {
   }
 
   private triggerClick (event: MouseEvent): void {
-    if (this.container.style.display === 'none') {
-      this.container.style.display = 'block'
+    if (this.logContainer.getStyle('display') === 'none') {
+      this.logContainer.defineStyle('display', 'block')
       this.trigger.innerHTML = 'off'
     } else {
-      this.container.style.display = 'none'
+      this.logContainer.defineStyle('display', 'none')
       this.trigger.innerHTML = 'on'
     }
   }
@@ -94,7 +100,7 @@ export class Console2html {
 
   private l (message): void {
     const logElement: LogElement = new LogElement()
-    this.container.appendChild(logElement.container)
+    this.logContainer.addChild(logElement.container)
     if (typeof message === 'object') {
       logElement.setValue((JSON && JSON.stringify ? JSON.stringify(message) : String(message)))
     } else {
@@ -103,7 +109,7 @@ export class Console2html {
   }
   private w (message): void {
     const warnELement: WarnElement = new WarnElement()
-    this.container.appendChild(warnELement.container)
+    this.logContainer.addChild(warnELement.container)
     if (typeof message === 'object') {
       warnELement.setValue((JSON && JSON.stringify ? JSON.stringify(message) : String(message)))
     } else {
@@ -112,7 +118,7 @@ export class Console2html {
   }
   private e (message): void {
     const errorElement: ErrorElement = new ErrorElement()
-    this.container.appendChild(errorElement.container)
+    this.logContainer.addChild(errorElement.container)
     if (typeof message === 'object') {
       errorElement.setValue((JSON && JSON.stringify ? JSON.stringify(message) : String(message)))
     } else {
@@ -125,7 +131,7 @@ export class Console2html {
    * @private
    */
   private c (): void {
-    this.container.innerHTML = ''
+    this.logContainer.setValue('')
   }
 
   private zIndexMax (): number {
