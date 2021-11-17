@@ -90,23 +90,23 @@ export class Console2html {
 
   private l (message): void {
     if (typeof message === 'object') {
-      this.container.innerHTML += '<div style="background-color: whitesmoke; padding: 5px;">' + (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '</div>'
+      this.container.innerHTML += '<div style="background-color: whitesmoke; border-bottom: 1px solid #e5e5e5; padding: 5px;">' + (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '</div>'
     } else {
-      this.container.innerHTML += '<div style="background-color: whitesmoke; padding: 5px;">' + message + '</div>'
+      this.container.innerHTML += '<div style="background-color: whitesmoke; border-bottom: 1px solid #e5e5e5; padding: 5px;">' + message + '</div>'
     }
   }
   private w (message): void {
     if (typeof message === 'object') {
-      this.container.innerHTML += '<div style="background-color: khaki; padding: 5px;">' + (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '</div>'
+      this.container.innerHTML += '<div style="background-color: #fff5c2; border-bottom: 1px solid khaki; padding: 5px;">' + (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '</div>'
     } else {
-      this.container.innerHTML += '<div style="background-color: khaki; padding: 5px;">' + message + '</div>'
+      this.container.innerHTML += '<div style="background-color: #fff5c2; border-bottom: 1px solid khaki; padding: 5px;">' + message + '</div>'
     }
   }
   private e (message): void {
     if (typeof message === 'object') {
-      this.container.innerHTML += '<div style="background-color: lightpink; padding: 5px;">' + (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '</div>'
+      this.container.innerHTML += '<div style="background-color: #ffd6d6; border-bottom: 1px solid lightpink; padding: 5px;">' + (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '</div>'
     } else {
-      this.container.innerHTML += '<div style="background-color: lightpink; padding: 5px;">' + message + '</div>'
+      this.container.innerHTML += '<div style="background-color: #ffd6d6; border-bottom: 1px solid lightpink; padding: 5px;">' + message + '</div>'
     }
   }
 
