@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "target": "ES5",
+    "module": "AMD",
     "declaration": true,
-    "outDir": "./template-html/dist",
+    "outFile": "./template-html/dist/Console2html.js",
     "strict": false,
     "removeComments": false,
     "strictPropertyInitialization": false

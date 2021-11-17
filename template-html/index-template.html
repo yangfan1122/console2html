@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <title>Console2html dev</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script>var exports = {}</script>
-  <script src="dist/Console2html.js" lang="text/javascript"></script>
+<!--  <script>var exports = {}</script>-->
+<!--  <script src="dist/Console2html.js" lang="text/javascript"></script>-->
+  <script data-main="dist/Console2html.js" src="require.js"></script>
   <style>
     body {
       margin: 0;
@@ -22,8 +23,15 @@
 <body>
 <div class="test-div">test content</div>
 <script>
-  const c2h = new Console2html()
-  c2h.init()
+  // const c2h = new Console2html()
+  // c2h.init()
+
+  require(["Console2html"], function (Console2html) {
+    const c2h = new Console2html.Console2html()
+    c2h.init()
+  })
+
+
 
   setTimeout(() => {
     for (var i = 0; i < 30; i++) {

@@ -1,3 +1,7 @@
+import LogElement from "./element/LogElement"
+import WarnElement from "./element/WarnElement"
+import ErrorElement from "./element/ErrorElement"
+
 export class Console2html {
   private wResizeHandler: any
   private container: HTMLDivElement
@@ -89,24 +93,30 @@ export class Console2html {
   }
 
   private l (message): void {
+    const logElement: LogElement = new LogElement()
+    this.container.appendChild(logElement.container)
     if (typeof message === 'object') {
-      this.container.innerHTML += '<div style="background-color: whitesmoke; border-bottom: 1px solid #e5e5e5; padding: 5px;">' + (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '</div>'
+      logElement.setValue((JSON && JSON.stringify ? JSON.stringify(message) : String(message)))
     } else {
-      this.container.innerHTML += '<div style="background-color: whitesmoke; border-bottom: 1px solid #e5e5e5; padding: 5px;">' + message + '</div>'
+      logElement.setValue(message)
     }
   }
   private w (message): void {
+    const warnELement: WarnElement = new WarnElement()
+    this.container.appendChild(warnELement.container)
     if (typeof message === 'object') {
-      this.container.innerHTML += '<div style="background-color: #fff5c2; border-bottom: 1px solid khaki; padding: 5px;">' + (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '</div>'
+      warnELement.setValue((JSON && JSON.stringify ? JSON.stringify(message) : String(message)))
     } else {
-      this.container.innerHTML += '<div style="background-color: #fff5c2; border-bottom: 1px solid khaki; padding: 5px;">' + message + '</div>'
+      warnELement.setValue(message)
     }
   }
   private e (message): void {
+    const errorElement: ErrorElement = new ErrorElement()
+    this.container.appendChild(errorElement.container)
     if (typeof message === 'object') {
-      this.container.innerHTML += '<div style="background-color: #ffd6d6; border-bottom: 1px solid lightpink; padding: 5px;">' + (JSON && JSON.stringify ? JSON.stringify(message) : String(message)) + '</div>'
+      errorElement.setValue((JSON && JSON.stringify ? JSON.stringify(message) : String(message)))
     } else {
-      this.container.innerHTML += '<div style="background-color: #ffd6d6; border-bottom: 1px solid lightpink; padding: 5px;">' + message + '</div>'
+      errorElement.setValue(message)
     }
   }
 
