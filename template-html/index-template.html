@@ -12,8 +12,8 @@
     .test-div {
       position: absolute;
       z-index: 100;
-      width: 100px;
-      height: 100px;
+      width: 100%;
+      height: 100%;
       background-color: khaki;
     }
   </style>
@@ -27,7 +27,7 @@
   })
 
   setTimeout(() => {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
       if (i % 2 === 0) {
         console.log('i:', i)
       } else if (i % 3 === 0) {
