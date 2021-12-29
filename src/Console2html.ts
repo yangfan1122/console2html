@@ -75,32 +75,20 @@ export class Console2html {
     console.clear = this.c.bind(this)
   }
 
-  private l (message): void {
+  private l (...args: any): void {
     const logElement: LogElement = new LogElement()
     this.logContainer.addChild(logElement.container)
-    if (typeof message === 'object') {
-      logElement.setValue((JSON && JSON.stringify ? JSON.stringify(message) : String(message)))
-    } else {
-      logElement.setValue(message)
-    }
+    logElement.setValue(Utils.convertArgs(args).join(' '))
   }
-  private w (message): void {
+  private w (...args: any): void {
     const warnELement: WarnElement = new WarnElement()
     this.logContainer.addChild(warnELement.container)
-    if (typeof message === 'object') {
-      warnELement.setValue((JSON && JSON.stringify ? JSON.stringify(message) : String(message)))
-    } else {
-      warnELement.setValue(message)
-    }
+    warnELement.setValue(Utils.convertArgs(args).join(' '))
   }
-  private e (message): void {
+  private e (...args: any): void {
     const errorElement: ErrorElement = new ErrorElement()
     this.logContainer.addChild(errorElement.container)
-    if (typeof message === 'object') {
-      errorElement.setValue((JSON && JSON.stringify ? JSON.stringify(message) : String(message)))
-    } else {
-      errorElement.setValue(message)
-    }
+    errorElement.setValue(Utils.convertArgs(args).join(' '))
   }
 
   /**
